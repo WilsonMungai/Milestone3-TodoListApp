@@ -8,45 +8,63 @@
 import SwiftUI
 import CoreData
 
-struct TaskListView: View {
+struct TaskListView: View
+{
     @Environment(\.managedObjectContext) private var viewContext
 
     // Fetch request to get all the items to be displayed
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.dueDate, ascending: true)],
         animation: .default)
+    
     private var items: FetchedResults<TaskItem>
 
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.dueDate!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.dueDate!, formatter: itemFormatter)
+    var body: some View
+    {
+        NavigationView
+        {
+            VStack
+            {
+                ZStack
+                {
+                    List
+                    {
+                        ForEach(items)
+                        {
+                            item in
+                            NavigationLink(destination: TaskEditView())
+                            {
+                                Text(item.dueDate!, formatter: itemFormatter)
+                            }
+                        }
+                        .onDelete(perform: deleteItems)
                     }
+                    .toolbar
+                    {
+                        ToolbarItem(placement: .navigationBarTrailing)
+                        {
+                            EditButton()
+                        }
+                    }
+                    AddNewTaskButton()
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            }
-            Text("Select an item")
+            }.navigationTitle("Tasks")
         }
     }
 
 
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
+    private func deleteItems(offsets: IndexSet)
+    {
+        withAnimation
+        {
             offsets.map { items[$0] }.forEach(viewContext.delete)
 
-            do {
+            do
+            {
                 try viewContext.save()
-            } catch {
+            } catch
+            {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
