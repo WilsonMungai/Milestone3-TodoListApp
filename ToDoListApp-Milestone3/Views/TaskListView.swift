@@ -10,6 +10,7 @@ import CoreData
 
 struct TaskListView: View
 {
+    // The context
     @Environment(\.managedObjectContext) private var viewContext
 
     // Fetch request to get all the items to be displayed
