@@ -17,6 +17,7 @@
 		C826E76D294535AB0075BED9 /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C826E76C294535AB0075BED9 /* TaskEditView.swift */; };
 		C826E76F294541990075BED9 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C826E76E294541990075BED9 /* CheckBoxView.swift */; };
 		C826E773294541FC0075BED9 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C826E772294541FC0075BED9 /* TaskCell.swift */; };
+		C826E777294551BE0075BED9 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C826E776294551BE0075BED9 /* DateModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		C826E76C294535AB0075BED9 /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		C826E76E294541990075BED9 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		C826E772294541FC0075BED9 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		C826E776294551BE0075BED9 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 			children = (
 				C826E770294541A60075BED9 /* Views */,
 				C826E756294528C90075BED9 /* ToDoListApp_Milestone3App.swift */,
+				C826E776294551BE0075BED9 /* DateModel.swift */,
 				C826E75F294528CB0075BED9 /* Persistence.swift */,
 				C826E761294528CB0075BED9 /* ToDoListApp_Milestone3.xcdatamodeld */,
 				C826E75A294528CB0075BED9 /* Assets.xcassets */,
@@ -168,6 +171,7 @@
 				C826E763294528CB0075BED9 /* ToDoListApp_Milestone3.xcdatamodeld in Sources */,
 				C826E760294528CB0075BED9 /* Persistence.swift in Sources */,
 				C826E773294541FC0075BED9 /* TaskCell.swift in Sources */,
+				C826E777294551BE0075BED9 /* DateModel.swift in Sources */,
 				C826E76D294535AB0075BED9 /* TaskEditView.swift in Sources */,
 				C826E759294528C90075BED9 /* TaskListView.swift in Sources */,
 				C826E757294528C90075BED9 /* ToDoListApp_Milestone3App.swift in Sources */,

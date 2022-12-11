@@ -12,6 +12,12 @@ struct TaskEditView: View
     // The context
     @Environment(\.managedObjectContext) private var viewContext
     
+    // Instance of the date model class
+    @EnvironmentObject var dateModel: DateModel
+    
+    // Navigation
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     // Variable that passes the task items
     @State var selectedTaskItem: TaskItem?
     @State var taskName: String
@@ -97,7 +103,13 @@ struct TaskEditView: View
             selectedTaskItem?.dueDate = dueDate
             // Assign the scheduleTime entity to the scheduleTime state variable
             selectedTaskItem?.scheduleTime = scheduleTime
+            
+            dateModel.saveContext(viewContext)
+            
+            // Navigates back to the list view
+            self.presentationMode.wrappedValue.dismiss()
         }
+        
     }
 }
 

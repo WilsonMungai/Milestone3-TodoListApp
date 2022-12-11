@@ -10,6 +10,9 @@ import SwiftUI
 // Add task button
 struct AddNewTaskButton: View
 {
+    // Instance of the date model class
+    @EnvironmentObject var dateModel: DateModel
+    
     var body: some View
     {
         VStack
@@ -18,7 +21,10 @@ struct AddNewTaskButton: View
             HStack
             {
                 Spacer()
-                NavigationLink (destination: TaskEditView())
+                NavigationLink (destination: TaskEditView(passedTaskItem: nil, initialDate: Date())
+                                
+                    // Passes the date model class through the views
+                    .environmentObject(dateModel))
                 {
                     Text("Add Task")
                         .font(.callout)

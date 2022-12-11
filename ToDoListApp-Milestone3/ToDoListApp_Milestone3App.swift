@@ -8,13 +8,20 @@
 import SwiftUI
 
 @main
-struct ToDoListApp_Milestone3App: App {
+struct ToDoListApp_Milestone3App: App
+{
     let persistenceController = PersistenceController.shared
 
-    var body: some Scene {
-        WindowGroup {
+    var body: some Scene
+    {
+        WindowGroup
+        {
+            let context = persistenceController.container.viewContext
+            let dateModel = DateModel(context)
+            
             TaskListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(dateModel)
         }
     }
 }

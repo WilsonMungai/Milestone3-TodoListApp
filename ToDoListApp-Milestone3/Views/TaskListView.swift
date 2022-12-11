@@ -12,6 +12,9 @@ struct TaskListView: View
 {
     // The context
     @Environment(\.managedObjectContext) private var viewContext
+    
+    // Instance of the date model class
+    @EnvironmentObject var dateModel: DateModel
 
     // Fetch request to get all the items to be displayed
     @FetchRequest(
@@ -32,10 +35,11 @@ struct TaskListView: View
                     {
                         ForEach(items)
                         {
-                            item in
-                            NavigationLink(destination: TaskEditView())
+                            taskItem in
+                            NavigationLink(destination: TaskEditView(passedTaskItem: taskItem, initialDate: Date())
+                                .environmentObject(dateModel))
                             {
-                                Text(item.dueDate!, formatter: itemFormatter)
+                                Text(taskItem.dueDate!, formatter: itemFormatter)
                             }
                         }
                         .onDelete(perform: deleteItems)
@@ -48,6 +52,7 @@ struct TaskListView: View
                         }
                     }
                     AddNewTaskButton()
+                        .environmentObject(dateModel)
                 }
             }.navigationTitle("Tasks")
         }
@@ -55,22 +60,26 @@ struct TaskListView: View
 
 
 
+    func saveContext(_ context: NSManagedObjectContext)
+    {
+        do
+        {
+            try context.save()
+        }
+        catch
+        {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
     private func deleteItems(offsets: IndexSet)
     {
         withAnimation
         {
             offsets.map { items[$0] }.forEach(viewContext.delete)
 
-            do
-            {
-                try viewContext.save()
-            } catch
-            {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            dateModel.saveContext(viewContext)
         }
     }
 }
