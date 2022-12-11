@@ -46,6 +46,8 @@ struct TaskEditView: View
             _scheduleTime = State(initialValue: false)
         }
     }
+    
+    // Add list view
     var body: some View
     {
         Form
@@ -63,6 +65,16 @@ struct TaskEditView: View
                 
                 // Due date picker
                 DatePicker("Due Date", selection: $dueDate, displayedComponents: displayComponents())
+            }
+            
+            // Completed task view section only runs when the task is completed
+            if selectedTaskItem?.isCompleted() ?? false
+            {
+                Section(header: Text("Completed"))
+                {
+                    Text(selectedTaskItem?.completedDate?.formatted(date: .abbreviated, time: .shortened) ?? "")
+                        .foregroundColor(.green)
+                }
             }
             
             Section()

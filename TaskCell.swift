@@ -11,7 +11,6 @@ struct TaskCell: View
 {
     // Instance of the date model class
     @EnvironmentObject var dateModel: DateModel
-    // Stores and passes the task item
     @ObservedObject var passedTaskItem: TaskItem
     
     var body: some View

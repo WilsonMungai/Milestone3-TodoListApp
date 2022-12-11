@@ -23,6 +23,7 @@ struct TaskListView: View
     
     private var items: FetchedResults<TaskItem>
 
+    // List view
     var body: some View
     {
         NavigationView
@@ -39,7 +40,9 @@ struct TaskListView: View
                             NavigationLink(destination: TaskEditView(passedTaskItem: taskItem, initialDate: Date())
                                 .environmentObject(dateModel))
                             {
-                                Text(taskItem.dueDate!, formatter: itemFormatter)
+                                // Task cell to hold the task items and time
+                                TaskCell(passedTaskItem: taskItem)
+                                    .environmentObject(dateModel)
                             }
                         }
                         .onDelete(perform: deleteItems)
@@ -73,6 +76,7 @@ struct TaskListView: View
         }
     }
     
+    // Delete function
     private func deleteItems(offsets: IndexSet)
     {
         withAnimation
@@ -84,14 +88,16 @@ struct TaskListView: View
     }
 }
 
-private let itemFormatter: DateFormatter = {
+private let itemFormatter: DateFormatter =
+{
     let formatter = DateFormatter()
     formatter.dateStyle = .short
     formatter.timeStyle = .medium
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider
+{
     static var previews: some View {
         TaskListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
